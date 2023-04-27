@@ -72,7 +72,7 @@ hibot.run()
 
 ##### configure with **config.json**
 
-```json
+```js
 {
   "botAccessToken": "", // (required) create a bot at https://developer.webex.com/my-apps
   "port": 8080, // local server port
