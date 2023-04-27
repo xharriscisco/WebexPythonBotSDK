@@ -144,8 +144,6 @@ bot.run()
 
 ---
 
-> webexbotsdk.teams
-
 **class Bot**
 
 ###### props
