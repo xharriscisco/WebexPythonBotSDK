@@ -28,6 +28,20 @@ webex bot creation framework and tools
 
 ---
 
+##### configure with **config.json**
+
+```js
+{
+  "botAccessToken": "", // (required) create a bot at https://developer.webex.com/my-apps
+  "port": 8080, // local server port
+  "botName": "", // give it a unique identifier (ex. mybot)
+  "encryptDb": false, // encrypts local json db
+  "botDbKey": "", // key used when 'encryptDb' is true
+  "ngrokAuthToken": "", // not recommended unless using a paid tier
+  "disableDb": false // disable tinydb
+}
+```
+
 ##### quick start
 
 ```py
@@ -68,20 +82,6 @@ def hears_hi(message:sdk.Message, data):
 
 hibot.setup('config.json')
 hibot.run()
-```
-
-##### configure with **config.json**
-
-```js
-{
-  "botAccessToken": "", // (required) create a bot at https://developer.webex.com/my-apps
-  "port": 8080, // local server port
-  "botName": "", // give it a unique identifier (ex. mybot)
-  "encryptDb": false, // encrypts local json db
-  "botDbKey": "", // key used when 'encryptDb' is true
-  "ngrokAuthToken": "", // not recommended unless using a paid tier
-  "disableDb": false // disable tinydb
-}
 ```
 
 ##### [webexteamssdk](https://webexteamssdk.readthedocs.io/en/latest/) is included
