@@ -1,0 +1,25 @@
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[project]
+name = "webexbotsdk"
+version = "0.2.0"
+readme = "README.md"
+license = { file = "LICENSE" }
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Topic :: Communications :: Chat"
+]
+keywords = [
+  "cisco", "webex", "teams", "bot", "python", "framework", "enterprise", "messaging"
+]
+requires-python = ">=3"
+dependencies = [
+  "bottle",
+  "webexteamssdk",
+  "pyngrok",
+  "tinydb",
+  "tinydb-encrypted-jsonstorage"
+]
