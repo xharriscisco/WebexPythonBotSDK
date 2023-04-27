@@ -16,11 +16,7 @@ webex bot creation framework and tools
 
 ## <a id='teams'></a> `webexbotsdk.teams`
 
-###### [#EG](#teams-eg) | [#API](#teams-api)
-
----
-
-###### A framework for creating a Webex Teams bot
+###### [#EG](#teams-eg) | [#API](#teams-api) | A framework for creating a Webex Teams bot
 
 <br/>
 
@@ -224,11 +220,7 @@ on(resource:str, event:str = None)
 
 ## <a id='util'></a> `webexbotsdk.util`
 
-###### [#API](#util-api)
-
----
-
-###### Framework helper methods
+###### [#API](#util-api) | Framework helper methods
 
 <br/>
 
@@ -249,8 +241,4 @@ is_bot(person:teams.Person|teams.Membership) -> bool
 
 ## <a id='tinydb'></a> `webexbotsdk.tinydb`
 
-###### [^TOC](#toc) | [@DOCS](https://tinydb.readthedocs.io/en/latest/)
-
----
-
-###### TinyDB library
+###### [^TOC](#toc) | [@DOCS](https://tinydb.readthedocs.io/en/latest/) | TinyDB library
