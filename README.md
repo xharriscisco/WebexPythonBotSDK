@@ -1,16 +1,14 @@
-webex bot creation framework and tools
+webex bot creation framework and tools via `pip install webexbotsdk`
 
-`pip install webexbotsdk`
+![PyPI](https://img.shields.io/pypi/v/webexbotsdk) ![PyPI - License](https://img.shields.io/pypi/l/webexbotsdk)
 
-###### by Xavier Harris
-
-<br/>
-
-##### <a id='toc'></a> webexbotsdk
+##### <a id='toc'></a> [webexbotsdk](https://pypi.org/project/webexteamssdk/)
 
 - [teams](#teams)
 - [util](#util)
 - [tinydb](#tinydb)
+
+##### [Contributing](#contributing)
 
 <br/>
 
@@ -240,3 +238,19 @@ is_bot(person:teams.Person|teams.Membership) -> bool
 ## <a id='tinydb'></a> `webexbotsdk.tinydb`
 
 ###### [^TOC](#toc) | [@DOCS](https://tinydb.readthedocs.io/en/latest/) | TinyDB library
+
+<br/>
+<br/>
+
+## <a id='contributing'></a> Contributing
+
+Create an Issue to:
+
+1. Ask a question
+2. Request a feature
+3. Report a bug
+4. ~~File a complaint~~
+
+Pull requests from branches/forks are also welcome! I will try to respond to them ASAP.
+
+
