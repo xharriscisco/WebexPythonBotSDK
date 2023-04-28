@@ -5,10 +5,11 @@ requires = ["setuptools", "wheel"]
 
 [project]
 name = "webexbotsdk"
-version = "0.2.0"
+version = "0.2.1"
 readme = "README.md"
-license = { file = "LICENSE" }
+license = "MIT"
 classifiers = [
+  "OSI Approved :: MIT License",
   "Development Status :: 3 - Alpha",
   "Topic :: Communications :: Chat"
 ]
