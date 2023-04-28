@@ -22,5 +22,6 @@ dist/
 docs/_build/
 *.egg-info/
 .DS_Store
+build/
 
 test.py

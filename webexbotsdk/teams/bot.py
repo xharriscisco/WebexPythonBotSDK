@@ -1,9 +1,9 @@
 from bottle import Bottle, request
 from webexteamssdk import WebexTeamsAPI, Webhook, Message, Person, Membership
 from webexteamssdk.models.cards import AdaptiveCard
-from pyngrok import ngrok
+from pyngrok import ngrok, conf, exception
 from typing import Literal, overload
-from re import Pattern
+from re import Pattern, sub
 from tinydb import TinyDB
 from tinydb.storages import JSONStorage
 import tinydb_encrypted_jsonstorage as tae
@@ -56,7 +56,7 @@ config = {
 - `ngrokAuthToken` not recommended
     '''
     if isinstance(config, str):
-      with open(join(dirname(__file__), 'config.json')) as f:
+      with open(config) as f:
         config = json.loads(f.read())
         return self.setup(config)
       
@@ -92,9 +92,12 @@ config = {
     # Set up ngrok tunnel
     for tunnel in ngrok.get_tunnels():
       if botName in tunnel.public_url:
-        ngrok.disconnect(tunnel.public_url)
-    tunnel:ngrok.NgrokTunnel = ngrok.connect(port, 'http')
-    public_url = tunnel.public_url.replace('http', 'https')
+        try:
+          ngrok.disconnect(tunnel.public_url)
+        except exception.PyngrokNgrokHTTPError as e:
+          self.log.error(f"Could not close tunnel: {e.message}")
+    tunnel:ngrok.NgrokTunnel = ngrok.connect(port)
+    public_url = sub(r'https?', 'https', tunnel.public_url)
     # Init webex api
     for webhook in self.api.webhooks.list():
       self.api.webhooks.delete(webhookId=webhook.id)
