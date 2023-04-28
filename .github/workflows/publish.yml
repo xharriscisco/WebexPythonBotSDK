@@ -24,8 +24,14 @@ jobs:
       - name: Build
         run: python -m build
 
-      - name: Upload to TestPyPi
+      # - name: Upload to TestPyPi
+      #   env:
+      #     TWINE_USERNAME: ${{ secrets.TESTPYPI_USER }}
+      #     TWINE_PASSWORD: ${{ secrets.TESTPYPI_PASS }}
+      #   run: twine upload --non-interactive -r testpypi dist/*
+
+      - name: Upload to PyPi
         env:
-          TWINE_USERNAME: ${{ secrets.TESTPYPI_USER }}
-          TWINE_PASSWORD: ${{ secrets.TESTPYPI_PASS }}
-        run: twine upload --non-interactive -r testpypi dist/*
+          TWINE_USERNAME: ${{ secrets.PYPI_USER }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASS }}
+        run: twine upload --non-interactive dist/*
