@@ -2,7 +2,7 @@ from enum import Enum
 from typing import Callable
 from bottle import request
 from webexteamssdk import WebexTeamsAPI, Message, Person, AttachmentAction, ApiError
-from re import Pattern, search, match
+from re import Pattern, search, match, compile
 from logging import Logger, getLogger, INFO
 
 from .util import is_bot
