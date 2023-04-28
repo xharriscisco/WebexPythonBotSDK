@@ -1,6 +1,7 @@
 webex bot creation framework and tools via `pip install webexbotsdk`
 
-![PyPI](https://img.shields.io/pypi/v/webexbotsdk) ![PyPI - License](https://img.shields.io/pypi/l/webexbotsdk)
+[![PyPI](https://img.shields.io/pypi/v/webexbotsdk)](https://pypi.org/project/webexbotsdk/)
+[![PyPI - License](https://img.shields.io/pypi/l/webexbotsdk)](https://github.com/xharriscisco/WebexPythonBotSDK/blob/main/LICENSE)
 
 ##### <a id='toc'></a> [webexbotsdk](https://pypi.org/project/webexteamssdk/)
 
