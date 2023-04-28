@@ -27,4 +27,4 @@ dependencies = [
 ]
 
 [project.urls]
-Source = "https://github.com/xharriscisco/WebexPythonBotSDK"
+repository = "https://github.com/xharriscisco/WebexPythonBotSDK"
