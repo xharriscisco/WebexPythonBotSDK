@@ -245,7 +245,7 @@ is_bot(person:teams.Person|teams.Membership) -> bool
 
 ## <a id='contributing'></a> Contributing
 
-Create an Issue to:
+Create an [Issue](https://github.com/xharriscisco/WebexPythonBotSDK/issues) to:
 
 1. Ask a question
 2. Request a feature
@@ -253,5 +253,3 @@ Create an Issue to:
 4. ~~File a complaint~~
 
 Pull requests from branches/forks are also welcome! I will try to respond to them ASAP.
-
-
