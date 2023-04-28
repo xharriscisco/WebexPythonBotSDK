@@ -6,7 +6,7 @@ requires = ["setuptools", "wheel"]
 [project]
 name = "webexbotsdk"
 description = "Webex bot creation framework and tools"
-version = "0.2.1"
+version = "0.2.2"
 readme = "README.md"
 license = { file = "LICENSE" }
 classifiers = [
