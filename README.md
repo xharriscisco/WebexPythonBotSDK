@@ -84,7 +84,7 @@ hibot.run()
 ```python
 from webexbotsdk.teams import Bot
 bot = Bot()
-all_rooms = api.rooms.list()
+all_rooms = bot.api.rooms.list()
 demo_rooms = [room for room in all_rooms if 'webexteamssdk Demo' in room.title]
 ```
 
