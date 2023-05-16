@@ -40,6 +40,9 @@ class Hook():
     self.description = description
     self.log = log or getLogger()
 
+  def __str__(self) -> str:
+    return f"Hook(name={self.name}, regex={','.join([re.pattern for re in self.regex])})"
+
   def matches(self, api:WebexTeamsAPI, data:dict = None):
     resource = data['resource'] if 'resource' in data else ''
     event = data['event'] if 'event' in data else ''

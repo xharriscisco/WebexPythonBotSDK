@@ -1,7 +1,7 @@
 from bottle import Bottle, request
 from webexteamssdk import WebexTeamsAPI, Webhook, Message, Person, Membership
 from webexteamssdk.models.cards import AdaptiveCard
-from pyngrok import ngrok, conf, exception
+from pyngrok import ngrok, exception
 from typing import Literal, overload
 from re import Pattern, sub
 from tinydb import TinyDB
@@ -11,6 +11,7 @@ from os.path import dirname, join
 from logging import Logger, basicConfig, getLogger, INFO
 import json
 
+from webexbotsdk import exception
 from .util import get_config_value
 from .hook import WebhookEvent, WebhookResource, Hook
 
@@ -32,9 +33,22 @@ class Bot():
     self.db = None
     self.log = None
 
+  def initDb(self):
+    disaleDb = get_config_value(self.config, 'disableDb', False)
+    if not disaleDb:
+      botDbkey = get_config_value(self.config, 'botDbKey', 's0meDefaultK3y?')
+      dbPath = f"{get_config_value(self.config, 'botName', 'bot')}.db"
+      if get_config_value(self.config, 'encryptDb', False):
+        self.db = TinyDB(encryption_key=botDbkey, path=dbPath, storage=tae.EncryptedJSONStorage)
+      else:
+        self.db = TinyDB(path=dbPath, storage=JSONStorage)
+    return not disaleDb
+      
+
   def table(self, name:str):
-    if self.db is not None:
-      return self.db.table(name)
+    if not self.db and not self.initDb():
+      raise exception.DbError('disabled')
+    return self.db.table(name)
 
   @overload
   def setup(self, config:str = None): pass
@@ -67,6 +81,7 @@ config = {
     botName = get_config_value(self.config, 'botName', 'mywebexbot')
     if ngrokAuthToken and len(ngrokAuthToken) > 5:
       ngrok.set_auth_token(ngrokAuthToken)
+    # Init webex api
     self.api = WebexTeamsAPI(botAccessToken)    
     # Set up logging 
     basicConfig(filename=f"{botName}.log",
@@ -76,14 +91,7 @@ config = {
     self.log.setLevel(INFO)
     print(f"Output written to {botName}.log")
     # Init db
-    disaleDb = get_config_value(self.config, 'disableDb', False)
-    if disaleDb:
-      botDbkey = get_config_value(self.config, 'botDbKey', 's0meDefaultK3y?')
-      dbPath = join(dirname(__file__), f"{get_config_value(self.config, 'botName', 'bot')}.db")
-      if get_config_value(self.config, 'encryptDb', False):
-        self.db = TinyDB(encryption_key=botDbkey, path=dbPath, storage=tae.EncryptedJSONStorage)
-      else:
-        self.db = TinyDB(path=dbPath, storage=JSONStorage)
+    self.initDb()
     self.log.info('Setup complete')
 
   def run(self):
@@ -98,7 +106,7 @@ config = {
           self.log.error(f"Could not close tunnel: {e.message}")
     tunnel:ngrok.NgrokTunnel = ngrok.connect(port)
     public_url = sub(r'https?', 'https', tunnel.public_url)
-    # Init webex api
+    # Create webex hooks
     for webhook in self.api.webhooks.list():
       self.api.webhooks.delete(webhookId=webhook.id)
     self.webhook = self.api.webhooks.create("bot_webhook_events", f"{public_url}/{botName}/events", WebhookResource.ALL.value, WebhookEvent.ALL.value)
@@ -107,8 +115,8 @@ config = {
     def callback(*args, **kwargs):
       for hook in self.hooks:
         ret = hook.matches(self.api, request.json)
-        if ret is not None:
-          hook.fn(ret, request.json)
+        if any([retItem is not None for retItem in ret]):
+          hook.fn(*ret)
     self.app.route(f'/{botName}/events', method=['GET','POST'], callback=callback)
     self.app.route(f'/{botName}/attachmentActions', method=['GET','POST'], callback=callback)
     self.app.run(host='127.0.0.1', port=port)

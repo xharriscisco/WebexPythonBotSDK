@@ -1,8 +1,10 @@
-name: Publish to TestPyPi
+name: Publish to PyPi
 
 on:
-  push:
-    branches: [main]
+  release:
+    types: [published]
+  # push:
+  #   branches: [main]
 
 jobs:
   build:

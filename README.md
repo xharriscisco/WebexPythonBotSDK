@@ -15,7 +15,7 @@ webex bot creation framework and tools via `pip install webexbotsdk`
 
 ## <a id='teams'></a> `webexbotsdk.teams`
 
-###### [#EG](#teams-eg) | [#API](#teams-api) | A framework for creating a Webex Teams bot
+###### [#EG](#teams-eg) | [#API](#teams-api) | A framework for creating a Webex Teams bot with automatic ngrok setup
 
 <br/>
 
